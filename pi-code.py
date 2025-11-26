@@ -17,7 +17,7 @@ IMGSZ           = 416
 CONF_THRESHOLD  = 0.50
 DEVICE          = "cpu"
 
-# 3. 클래스 ID (★data.yaml 파일 확인 필수★)
+# 3. 클래스 ID (data.yaml 파일 확인 필수)
 # 예: ['chest', 'head', 'hip', 'thigh'] 순서라면 chest=0, hip=2
 TARGET_CHEST_CLASS = 0 
 TARGET_HIPS_CLASS  = 2 
@@ -189,7 +189,7 @@ def main():
     last_chest = None
     last_hips = None
     
-    # ★ 상태 변수: 로봇이 물체를 잡았는가?
+    # 상태 변수: 로봇이 물체를 잡았는가?
     is_attached = False 
     
     frame_count = 0
@@ -221,7 +221,6 @@ def main():
 
             # 4. 아두이노 전송
             send_to_arduino(cmd)
-            
             # Headless 모드이므로 imshow 없음
 
         except KeyboardInterrupt:
