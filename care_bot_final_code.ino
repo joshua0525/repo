@@ -126,24 +126,15 @@ void moveServo(int idx, int delta) {
   int minAngle = 20; // 모든 서보의 기본 최소 각도
   int maxAngle = 160; // 모든 서보의 기본 최대 각도
 
-  // 3. ★★★ 특정 서보에 대한 예외 처리 ★★★
   if (idx == 4) { // 3번 서보 (왼쪽 어깨)인 경우
     maxAngle = 85; // 최대 각도를 85로 제한
-    // [업데이트] 초기값이 65도이고, LU(-5), LD(+5) 명령을 사용하시네요.
-    // '가까이 움직일 때' = + 방향(LD)
-    // 따라서 maxAngle을 85로 제한하는 것이 맞습니다.
-    
   }
   
-  // ★★★ 여기에 새 제한 추가 ★★★
   if (idx == 1) { // 1번 서보 (오른쪽 어깨)인 경우
     // '떨어지지 않게' = - 방향(RSD)
     // 따라서 minAngle을 85로 제한합니다.
     minAngle = 85;
   }
-  // (나중에 다른 서보도 추가할 수 있습니다. 예: if (idx == 1) { minAngle = 30; })
-
-
   // 4. 계산된 각도를 min/max 범위 안으로 제한(constrain)
   servoAngles[idx] = constrain(newAngle, minAngle, maxAngle);
 
@@ -163,7 +154,6 @@ void moveServo(int idx, int delta) {
   Serial.println(servoAngles[idx]);
 }
 
-// --- 이 함수들은 moveServo()를 호출하므로 수정할 필요 없음 ---
 void moveDualServoOpposite(int idx1, int idx2, int delta) {
   moveServo(idx1, delta);
   moveServo(idx2, -delta);
